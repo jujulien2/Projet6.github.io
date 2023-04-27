@@ -254,6 +254,12 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+.gallery div {
+	display: block;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
