@@ -153,16 +153,16 @@ section {
 }
 
 /* filtres */
-.colorWhite {
+.onclickClicked {
 	background-color: #1D6154;
 	color: white;
 }
 
-.colorGreen {
+
+.colorFilters {
 	color: #1D6154;
 	background-color: white;
 }
-
 
 .filters {
 	display: flex;
@@ -172,13 +172,14 @@ section {
 	margin-top: 4em;
 }
 
-.filters div {
+.filtersColor {
 	border: 1px solid#1D6154;
 	font-size: 18px;
 	padding: 8px 25px 8px 25px;
 	border-radius: 20px;
 	font-family: 'Syne';
 	cursor: pointer;
+
 }
 
 
