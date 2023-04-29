@@ -1,27 +1,23 @@
 
 
 
+
+
+
+
 fetch('http://localhost:5678/api/works')
     .then(response => (response.json()))
     // les datas sont appelées donc on peut en faire quelque chose de ces datas ( datas = infos récupérer depuis l'API), (ci-dessous) ::
     .then((data) => {
-        console.table(data);
-        const gallery = document.querySelector(".gallery");
-        // création plusieurs DIV
-
-        for (let i = 0; i < 11; i++) {
-            let divGallery = document.createElement("div");
-            gallery.appendChild(divGallery);
-
-            // réunir les infos du data dans la let galerie, puis ajouter le contenu dans les DIV
-            for (let galerie of data) {
-                console.log(galerie);
-                divGallery.innerHTML = galerie.title;
-                let pictures = document.createElement("img");
-                divGallery.appendChild(pictures);
-                pictures.src = galerie.imageUrl;
-            }
-        }
+        const gallery = document.querySelector('.gallery');
+        data.forEach(items => {
+            const divOfProjects = document.createElement('div');
+            const imageDiv = document.createElement('img');
+            divOfProjects.innerHTML = items.title;
+            imageDiv.src = items.imageUrl;
+            gallery.appendChild(divOfProjects);
+            divOfProjects.appendChild(imageDiv);
+        });
     });
 
 
