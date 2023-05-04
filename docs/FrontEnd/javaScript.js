@@ -2,52 +2,76 @@
 
 
 
+// fonction qui créer les divs pour en afficher ensuite leurs contenues
+
+
+let createDiv = function (items) {
+    const divOfProjects = document.createElement('div');
+    const imageDiv = document.createElement('img');
+    const gallery = document.querySelector('.gallery');
+    divOfProjects.innerHTML = items.title;
+    imageDiv.src = items.imageUrl;
+    gallery.appendChild(divOfProjects);
+    divOfProjects.appendChild(imageDiv);
+}
+// fonction qui créer les divs filtres et ajoute l'événement click
+
+let filtersDiv = function (filtre) {
+    const divOfFilters = document.createElement('div');
+    const theFilters = document.querySelector('.filters');
+    theFilters.appendChild(divOfFilters);
+    divOfFilters.innerHTML = filtre.name;
+    divOfFilters.classList.add('styleFilters');
+    divOfFilters.classList.add("colorFilters");
+
+};
 
 
 
+// Les appels API avec les fonctions des filtres et divs avec forEach
 fetch('http://localhost:5678/api/works')
     .then(response => (response.json()))
-    // les datas sont appelées donc on peut en faire quelque chose de ces datas ( datas = infos récupérer depuis l'API), (ci-dessous) ::
     .then((data) => {
-        const gallery = document.querySelector('.gallery');
-        data.forEach(items => {
-            const divOfProjects = document.createElement('div');
-            const imageDiv = document.createElement('img');
-            divOfProjects.innerHTML = items.title;
-            imageDiv.src = items.imageUrl;
-            gallery.appendChild(divOfProjects);
-            divOfProjects.appendChild(imageDiv);
-        });
+        data.forEach(createDiv);
+        console.log(filtersDiv);
+
+
+        fetch('http://localhost:5678/api/categories')
+            .then(response => (response.json()))
+            .then((categories) => {
+                categories.forEach(filtersDiv);
+
+            });
+
     });
 
 
-fetch('http://localhost:5678/api/categories')
-    .then(response => (response.json()))
-    .then(response2 => console.table(response2))
 
 
 
+// affiche page login cliquant sur 'login' : 
+const login = document.querySelector("#logButton");
+const loginPage = document.querySelector('.loginPage');
+login.addEventListener('click', function () {
+    loginPage.classList.replace('hidden', 'show')
 
-// Filtres changement background et couleur au clic
-
-// onclick = au moment du click il prend en compte les onclick en dernier de la liste ci-dessous 
-function changeApparence(onclick) {
-    let onclicks = document.querySelectorAll(".filtersColor ");
-    // on les selectionnent tous puis grâce au :  remove("onClickClicked")  automatiquement à chaque fois qu'on clique autre part
-    //  initialement la classe se retire. Et ensuite, bien  mettre la classe de couleur de base sans clique des filtres : ("colorFilters")
-    for (let i = 0; i < onclicks.length; i++) {
-        onclicks[i].classList.remove("onclickClicked");
-        onclicks[i].classList.add("colorFilters");
-    }
-    // Au moment du clique, prend en compte le paramètre de la fonction (onclick) donc comme indiqué ci-dessous on ajoute la classe 
-    // ("onclickClicked") Sans oublier de retirer en même temps la classe : ("colorFilters") pour bien remplacer les couleurs !
-    onclick.classList.add("onclickClicked");
-    onclick.classList.remove("colorFilters");
-}
+})
+// back à l'accueil sur le boutons 'projets' : 
+const project = document.querySelector('#project');
+project.addEventListener('click', function () {
+    loginPage.classList.replace('show', 'hidden')
+})
 
 
 
 
 
+// divOfFilters.addEventListener('click', function changeApparence(onclick) {
 
+//     divOfFilters.classList.add("onclickClicked");
+//     divOfFilters.classList.remove("colorFilters");
 
+//     onclick.classList.remove("onclickClicked");
+//     onclick.classList.add("colorFilters");
+
+// })

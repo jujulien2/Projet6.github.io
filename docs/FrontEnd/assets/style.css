@@ -109,6 +109,12 @@ section {
 
 body {
 	line-height: 1;
+	margin: 0 auto;
+	z-index: 1;
+	max-width: 1140px;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	
 }
 
 ol,
@@ -135,12 +141,6 @@ table {
 }
 
 /** end reset css**/
-body {
-	max-width: 1140px;
-	margin: auto;
-	font-family: 'Work Sans';
-	font-size: 14px;
-}
 
 header {
 	display: flex;
@@ -172,7 +172,7 @@ section {
 	margin-top: 4em;
 }
 
-.filtersColor {
+.styleFilters{
 	border: 1px solid#1D6154;
 	font-size: 18px;
 	padding: 8px 25px 8px 25px;
@@ -211,12 +211,16 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+cursor: pointer;
 }
 
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+}
+nav li a{
+	text-decoration: none;
+color: black;
 }
 
 li:hover {
@@ -328,30 +332,133 @@ footer nav ul {
 	margin: 2em
 }
 
-
-
-
-
-/* input {
-	display: none;
+/* PAGE LOGIN -> */
+.show{
+	visibility: visible;
+	transition: all 0.4s ;
+}
+.hidden{
+	visibility: hidden;
+}
+.loginPage{
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+    background: #E5E5E5;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+	z-index: 1000;
 }
 
-.type:hover {
-	transform: scale(1.1);
-	transition: all 0.2s;
+/* head */
+.head{
+    width: 87%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 100px 0 150px;
+    align-items: center;
 }
-
-.label {
-	border: 1px solid#1D6154;
-	color: #1D6154;
-	font-size: 18px;
-	padding: 8px 25px 8px 25px;
-	border-radius: 20px;
-	font-family: 'Syne';
+.logo{
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+.sophieLogo{
+    height: 28px;
+}
+.textLogo{
+    height: 12px
+    ;
+}
+.navUL {
+    display: flex;
+    font-size: 1.2em;
+    gap: 3em;
+    list-style: none;
+    font-family: 'Work Sans', sans-serif;
+}
+.navUL  a{
+    color: #000000;
+    text-decoration: none;
+}
+.navUL a:hover{
+	color: #B1663C;
+}
+/* main / login */
+.login{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 12em;
+    height: 500px;
+   align-items: center;
+}
+.login img{
+    height: 36px;
+    width: 10%;
+}
+/* inputs */
+.mail, .connect, .footer{
+    font-family: 'Work Sans', sans-serif;
+}
+.mail form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.mail form label{
+    margin-top: 2em;
+}
+input[type='email'], 
+input[type='password']{
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 10px;
+border: 0;
+box-shadow: #141414a4 4px 4px 6px ;
+height: 51px;
+    width: 379px;
+}
+/* bouton se connecter et mdp oublié */
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 	cursor: pointer;
 }
+.button a{
+    color: #000000;
 
-input[type='checkbox']:checked+.label {
-	background-color: #1D6154;
-	color: white;
-} */
+}
+
+.connect{
+    margin-top: 3em;
+    padding: 15px 60px 15px 60px;
+    background-color: #1D6154;
+    color: white;
+    font-size: 14px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: 0;
+}
+/* footer */
+.footer{
+    display: flex;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    position:fixed;
+    bottom: 1px;
+    padding: 1px 10em 1px 1px ;
+    align-items: center;
+font-size: 14px;
+}
+.footer p{
+	position: absolute;
+	right: 18em;
+}
+
