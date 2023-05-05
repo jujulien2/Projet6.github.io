@@ -5,6 +5,7 @@
 // fonction qui créer les divs pour en afficher ensuite leurs contenues
 
 
+
 let createDiv = function (items) {
     const divOfProjects = document.createElement('div');
     const imageDiv = document.createElement('img');
@@ -33,7 +34,7 @@ fetch('http://localhost:5678/api/works')
     .then(response => (response.json()))
     .then((data) => {
         data.forEach(createDiv);
-        console.log(filtersDiv);
+
 
 
         fetch('http://localhost:5678/api/categories')
@@ -44,6 +45,36 @@ fetch('http://localhost:5678/api/works')
             });
 
     });
+
+
+
+
+// login 
+function loginEventListenner() {
+    const formulaireLogin = document.querySelector('.loginForm')
+    formulaireLogin.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Création de l'objet du nouvel avis.
+        const identifiant = {
+            email: event.target.querySelector("[name=email]").value,
+            password: event.target.querySelector("[name=password]").value
+        }
+        const chargeutile = JSON.stringify(identifiant);
+        fetch('http://localhost:5678/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Accept': "application/Json",
+                "content-Type": "application/Json"
+            },
+            body: chargeutile
+        });
+    })
+}
+
+
+
+
+
 
 
 

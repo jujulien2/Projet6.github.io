@@ -423,13 +423,7 @@ height: 51px;
     width: 379px;
 }
 /* bouton se connecter et mdp oublié */
-.button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-	cursor: pointer;
-}
+
 .button a{
     color: #000000;
 
