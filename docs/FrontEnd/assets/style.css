@@ -153,11 +153,19 @@ section {
 }
 
 /* filtres */
-.onclickClicked {
+.inactive{
+	opacity: 0;
+	transition: all 0.4s;
+}
+.active{
+	opacity: 1;
+	transition: all 0.4s;
+
+}
+.clickedFilters{
 	background-color: #1D6154;
 	color: white;
 }
-
 
 .colorFilters {
 	color: #1D6154;
@@ -429,7 +437,12 @@ height: 51px;
 
 }
 
+.ForgotPassword{
+	
+	color: #000000;
+}
 .connect{
+	width: 60%;
     margin-top: 3em;
     padding: 15px 60px 15px 60px;
     background-color: #1D6154;
@@ -438,6 +451,8 @@ height: 51px;
     border-radius: 30px;
     font-weight: bold;
     border: 0;
+	margin-left: 6em;
+	margin-bottom: 2em;
 }
 /* footer */
 .footer{
