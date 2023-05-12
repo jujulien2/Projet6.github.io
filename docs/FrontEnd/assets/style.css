@@ -109,12 +109,16 @@ section {
 
 body {
 	line-height: 1;
-	margin: 0 auto;
 	z-index: 1;
-	max-width: 1140px;
 	font-family: 'Work Sans';
 	font-size: 14px;
+	position: relative;
 	
+}
+header, main, footer{
+	margin: 0 auto;
+	max-width: 1140px;
+
 }
 
 ol,
@@ -145,7 +149,38 @@ table {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin-top: 50px;
+}
+
+/* en tête quand l'utilisateur est log */
+.userModal{
+display: flex;
+justify-content: center;
+width: 100%;
+height: 85px;
+background-color: #000000;
+gap: 45px;
+align-items: center;
+
+}
+
+.editionMod{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background-color: #000000;
+	border: none;
+	color: rgba(255, 255, 255, 0.473);
+	font-size: 16px;
+}
+.shareChange{
+	border-radius: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	padding: 25px 35px 23px 35px;
+	font-weight: 600;
 }
 
 section {
@@ -153,15 +188,7 @@ section {
 }
 
 /* filtres */
-.inactive{
-	opacity: 0;
-	transition: all 0.4s;
-}
-.active{
-	opacity: 1;
-	transition: all 0.4s;
 
-}
 .clickedFilters{
 	background-color: #1D6154;
 	color: white;
@@ -226,7 +253,7 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-nav li a{
+nav ul a{
 	text-decoration: none;
 color: black;
 }
@@ -238,6 +265,31 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+}
+.titleFilters{
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+.modalUnderImg{
+	display: flex;
+	gap: 15px;
+	margin-left: 50px;
+	margin-top: 15px;
+	border: none;
+	background-color: white;
+	font-family: 'Work Sans';
+	font-size: 16px;
+}
+.modalBesideFilters{
+	display: flex;
+	gap: 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+	border: none;
+	background-color: white;
+	font-family: 'Work Sans';
+	font-size: 16px;
 }
 
 #introduction figure {
@@ -264,7 +316,7 @@ li:hover {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	
 }
 
 .gallery div {
@@ -341,13 +393,7 @@ footer nav ul {
 }
 
 /* PAGE LOGIN -> */
-.show{
-	visibility: visible;
-	transition: all 0.4s ;
-}
-.hidden{
-	visibility: hidden;
-}
+
 .loginPage{
 top: 50%;
 left: 50%;

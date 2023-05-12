@@ -18,69 +18,37 @@
 
 
 
+
 <body>
-	<!-- Page login ! -->
-	<div class="loginPage hidden">
-
-		<!-- header  login -->
-		<div class="head">
-			<a href="#" class="logo">
-				<img class="sophieLogo" src="./assets/logo/Sophie Bluel.png" alt="" srcset="">
-				<img class="textLogo" src="./assets/logo/architecte d’intérieur.png" alt="" srcset="">
-			</a>
-			<div class="nav">
-				<ul class="navUL">
-					<li><a id="project" href="#">projets</a></li>
-					<li><a href="#">contact</a></li>
-					<li><a href="#"><strong>login</strong></a></li>
-					<li><a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-		<!-- input login -->
-
-		<div class="login">
-			<img src="./assets/logo/Log In.png" alt="log in" srcset="">
-			<div class="mail">
-				<form class="loginForm">
-					<label for="email">E-mail :</label>
-					<input type="email" id="email" name="email" required>
-					<label for="password">Mot de passe :</label>
-					<input type="password" id="password" name="password" required>
-					<button class="connect">Se connecter</button>
-				</form>
-			</div>
-			<a class="ForgotPassword" href="#">Mot de passe oublié</a>
-
-
-		</div>
-		<!-- footer login -->
-
-		<div class="footer">
-			<p>Mentions légales</p>
-		</div>
-
+	<div class="userModal">
+		<button class="editionMod"><i class="fa-solid fa-pen-to-square "></i>Mode édition</button>
+		<button class="shareChange">Publier les changements</button>
 	</div>
+	<!-- Page login ! -->
+
 
 	<!--Fin de la page login !  -->
 
 	<header>
+
 		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li id="logButton">login</li>
+				<a href="login.html">
+					<li>login</li>
+				</a>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
+
 	</header>
 	<main>
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<button class="modalUnderImg"><i class="fa-solid fa-pen-to-square "></i>Modifier</button>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -94,7 +62,10 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="titleFilters">
+				<h2>Mes Projets</h2>
+				<button class="modalBesideFilters"><i class="fa-solid fa-pen-to-square "></i>Modifier</button>
+			</div>
 			<div class="filters">
 				<div class="styleFilters  all">Tous</div>
 			</div>
@@ -124,6 +95,7 @@
 			</ul>
 		</nav>
 	</footer>
+
 	<script src="javaScript.js"></script>
 	<script src="https://kit.fontawesome.com/d0024e0071.js" crossorigin="anonymous"></script>
 </body>

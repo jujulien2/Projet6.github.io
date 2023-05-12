@@ -74,14 +74,16 @@ fetch('http://localhost:5678/api/works')
                 categories.forEach(filtersDiv);
                 const eachFilters = theFilters.children
                 for (let eachfilter of eachFilters) {
-                    eachfilter.addEventListener('click', function (e) {
 
+                    eachfilter.addEventListener('click', function (e) {
                         let idFilter = this.id
+
                         const galleryChildren = Array.from(gallery.children)
+                        console.log(galleryChildren);
                         for (let imagesOfChildren of galleryChildren) {
-                            imagesOfChildren.classList.replace('active', 'inactive');
-                            if (imagesOfChildren.id == idFilter || e.target == document.querySelector('.filters div')) {
-                                imagesOfChildren.classList.replace('inactive', 'active');
+
+                            if (imagesOfChildren.id !== idFilter) {
+                                imagesOfChildren.remove()
                             }
                         }
                     })
@@ -99,49 +101,11 @@ filterALL.addEventListener('click', () => {
 
 
 
-let CallApiLogin = function login(event) {
-    event.preventDefault();
-    const identifiant = {
-        email: event.target.querySelector("[name=email]").value,
-        password: event.target.querySelector("[name=password]").value
-    }
-    const chargeUtile = JSON.stringify(identifiant);
-    let LoginAPI = fetch('http://localhost:5678/api/users/login', {
-        method: 'POST',
-        headers: {
-            "content-Type": "application/Json"
-        },
-        body: chargeUtile
-    })
-        .then(response => (response.json()))
-        .then((result) => {
-            console.log(result)
-
-        })
-
-}
-
-
-// login 
-const formulaireLogin = document.querySelector('.loginForm')
-formulaireLogin.addEventListener('submit', CallApiLogin)
 
 
 
 
 
-// affiche page login cliquant sur 'login' : 
-const login = document.querySelector("#logButton");
-const loginPage = document.querySelector('.loginPage');
-login.addEventListener('click', function () {
-    loginPage.classList.replace('hidden', 'show')
-
-})
-// back à l'accueil sur le boutons 'projets' : 
-const project = document.querySelector('#project');
-project.addEventListener('click', function () {
-    loginPage.classList.replace('show', 'hidden')
-})
 
 
 
