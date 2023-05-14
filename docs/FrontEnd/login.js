@@ -21,7 +21,7 @@ let CallApiLogin = function login(event) {
             if (response.ok) {
                 response.json().then((result) => {
                     console.log(result)
-
+                    window.location.href = 'index.html'
 
                 })
             } else {

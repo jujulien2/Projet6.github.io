@@ -163,6 +163,38 @@ gap: 45px;
 align-items: center;
 
 }
+/* les modals */
+.modal1{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.80);
+}
+.modalWrapper{
+	height: 650px;
+	width: 600px;
+	background-color: white;
+	border-radius: 4%;
+	overflow: auto;
+	padding: 25px;
+	max-width: calc(100vw - 50px);
+    max-height: calc(100vh - 50px);
+}
+.closeCross{
+	display: flex;
+	justify-content: flex-end;
+}
+.titleModalOne{
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+	font-size: 36px;
+	font-weight: 400;
+	font-family: 'Work Sans';
+}
 
 .editionMod{
 	display: flex;
@@ -202,6 +234,7 @@ section {
 .filters {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	gap: 2em;
 	margin-bottom: 4em;
 	margin-top: 4em;

@@ -72,21 +72,23 @@ fetch('http://localhost:5678/api/works')
             .then((categories) => {
 
                 categories.forEach(filtersDiv);
-                const eachFilters = theFilters.children
-                for (let eachfilter of eachFilters) {
+                const eachFilters = Array.from(theFilters.children)
 
-                    eachfilter.addEventListener('click', function (e) {
-                        let idFilter = this.id
+                for (let eachFilter of eachFilters) {
 
-                        const galleryChildren = Array.from(gallery.children)
-                        console.log(galleryChildren);
-                        for (let imagesOfChildren of galleryChildren) {
 
-                            if (imagesOfChildren.id !== idFilter) {
-                                imagesOfChildren.remove()
-                            }
+                    eachFilter.addEventListener('click', function () {
+                        let idFilter = this.id;
+
+                        const galleryChildren = Array.from(gallery.children);
+                        gallery.innerHTML = '';
+
+                        let newArrayChildren = galleryChildren.filter(childrenFiltered => childrenFiltered.id === idFilter);
+
+                        for (let imageChild of newArrayChildren) {
+                            gallery.appendChild(imageChild);
                         }
-                    })
+                    });
                 }
             });
     });
@@ -100,7 +102,24 @@ filterALL.addEventListener('click', () => {
 })
 
 
-
+// modal 
+const modalOne = document.querySelector('.modalUnderImg');
+let modal = null
+const openModal = function (e) {
+    e.preventDefault()
+    const mymodalOne = document.querySelector('#modal1')
+    mymodalOne.style.display = null
+    mymodalOne.removeAttribute('aria-hidden')
+    modal = mymodalOne
+    modal.addEventListener('click', closeModal)
+}
+const closeModal = function (e) {
+    e.preventDefault()
+    modal.style.display = 'none'
+    modal.setAttribute('aria-hidden', true)
+    modal.removeEventListener('click', closeModal)
+}
+modalOne.addEventListener('click', openModal)
 
 
 
