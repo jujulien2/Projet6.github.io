@@ -20,8 +20,11 @@ let CallApiLogin = function login(event) {
         .then(response => {
             if (response.ok) {
                 response.json().then((result) => {
-                    console.log(result)
-                    window.location.href = 'index.html'
+                    console.log('token = ', result)
+                    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
+                    localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4")
+                    window.location.href = 'userEdit.html'
+
 
                 })
             } else {
