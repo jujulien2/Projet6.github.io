@@ -12,16 +12,17 @@ const gallery = document.querySelector('.gallery');
 
 
 // fonction qui créer les divs pour en afficher ensuite leurs contenues
-let createDiv = function (items) {
+let createDiv = function (item) {
     divOfProjects = document.createElement('div');
     imageDiv = document.createElement('img');
-    divOfProjects.innerHTML = items.title;
+    divOfProjects.innerHTML = item.title;
     divOfProjects.classList.add('active');
-    divOfProjects.id = items.categoryId;
-    imageDiv.src = items.imageUrl;
+    divOfProjects.id = item.categoryId;
+    imageDiv.src = item.imageUrl;
     gallery.appendChild(divOfProjects);
     divOfProjects.appendChild(imageDiv);
 }
+
 // fonction qui créer les divs filtres et ajoute l'événement click
 
 const theFilters = document.querySelector('.filters');
@@ -61,12 +62,13 @@ theFilters.addEventListener('click', function (e) {
 
 
 // Les appels API avec les fonctions des filtres et divs avec forEach
-let cards = ''
+
 fetch('http://localhost:5678/api/works')
     .then(response => (response.json()))
     .then((data) => {
-        cards = data;
+        let cards = data;
         data.forEach(createDiv);
+
 
 
 
@@ -82,8 +84,6 @@ fetch('http://localhost:5678/api/works')
 
                     eachFilter.addEventListener('click', function () {
                         let idFilter = this.id;
-                        console.log(idFilter);
-                        console.log(cards);
                         if (!idFilter) {
                             gallery.innerHTML = ''
                             cards.forEach(createDiv)
@@ -96,15 +96,6 @@ fetch('http://localhost:5678/api/works')
                         });
                         gallery.innerHTML = ''
                         filtersCards.forEach(createDiv)
-
-                        // const galleryChildren = Array.from(gallery.children);
-                        // gallery.innerHTML = '';
-
-                        // let newArrayChildren = galleryChildren.filter(childrenFiltered => childrenFiltered.id === idFilter);
-
-                        // for (let imageChild of newArrayChildren) {
-                        //     gallery.appendChild(imageChild);
-                        // }
                     });
                 }
             });
@@ -121,36 +112,9 @@ filterALL.addEventListener('click', () => {
 
 
 
-// modal 
-const modalOne = document.querySelector('.modalBesideFilters');
-let modal = null
-const openModal = function (e) {
-    e.preventDefault()
-    const mymodalOne = document.querySelector('#modal1')
-    const modalWrapper = document.querySelector('.modalWrapper')
-    const closeCross = document.querySelector('.closeCross')
-    mymodalOne.style.display = null
-    mymodalOne.removeAttribute('aria-hidden')
-    modal = mymodalOne
-    modal.addEventListener('click', closeModal)
-    closeCross.addEventListener('click', closeModal)
-    modalWrapper.addEventListener('click', stopPropagation)
-}
-// fermer la modal 
-const closeModal = function (e) {
-    e.preventDefault()
-    modal.style.display = 'none'
-    modal.setAttribute('aria-hidden', true)
-    modal.removeEventListener('click', closeModal)
 
 
-}
-// ajout de la fonction 
-modalOne.addEventListener('click', openModal)
-// empêche l'evenement de se propager sur la div ciblée ( en loccurence "modalWrapper") pour pouoir cliquer dans la modal sans qu'elle se ferme
-const stopPropagation = function (e) {
-    e.stopPropagation()
-}
+
 
 
 
