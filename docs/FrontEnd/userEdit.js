@@ -4,12 +4,14 @@ let modal = null
 const openModal = function (e) {
 
     e.preventDefault()
-    const mymodalOne = document.querySelector('#modal1')
+    const myModalOne = document.querySelector('#modal1')
     const modalWrapper = document.querySelector('.modalWrapper')
     const closeCross = document.querySelector('.closeCross')
-    mymodalOne.style.display = null
-    mymodalOne.removeAttribute('aria-hidden')
-    modal = mymodalOne
+    myModalOne.style.display = null
+    myModalOne.removeAttribute('aria-hidden')
+    myModalOne.setAttribute('aria-modal', true)
+
+    modal = myModalOne
     modal.addEventListener('click', closeModal)
     closeCross.addEventListener('click', closeModal)
     modalWrapper.addEventListener('click', stopPropagation)
@@ -20,7 +22,10 @@ const closeModal = function (e) {
     modal.style.display = 'none'
     modal.setAttribute('aria-hidden', true)
     modal.removeEventListener('click', closeModal)
+    modal.removeAttribute('aria-modal')
+
 }
+
 
 const modalOne = document.querySelector('.modalBesideFilters');
 modalOne.addEventListener('click', openModal)
@@ -53,6 +58,47 @@ const displayModal = function (item) {
     divOfEachContent.appendChild(trashIcone);
     divOfEachContent.appendChild(moveIcone);
 
+}
+
+// affichage modal2 add photo : 
+let displayModalAddImg = function () {
+    const myModalOne = document.querySelector('#modal1')
+    const myModalTwo = document.querySelector('.modal2')
+    myModalTwo.addEventListener('click', closeModalTwo)
+    myModalOne.style.display = 'none'
+    myModalTwo.style.display = null
+    const modalAddImgWrapper = document.querySelector('.modalAddImgWrapper')
+    modalAddImgWrapper.addEventListener('click', stopPropagation)
 
 
+}
+
+const addPictureButton = document.querySelector('.addPictureButton');
+addPictureButton.addEventListener('click', displayModalAddImg)
+
+// gerer la fermrute et le click de la modal2 : 
+let closeModalTwo = function () {
+    const myModalTwo = document.querySelector('.modal2')
+    const modalAddImgWrapper = document.querySelector('.modalAddImgWrapper')
+    myModalTwo.style.display = 'none'
+    modalAddImgWrapper.addEventListener('click', stopPropagation)
+}
+
+const closeCross2 = document.querySelector('.closeCross2')
+closeCross2.addEventListener('click', closeModalTwo)
+
+// affichage categories dans le select déroulabt 
+// rappel du fecth category
+fetch('http://localhost:5678/api/categories')
+    .then(response => (response.json()))
+    .then((categories) => {
+        categories.forEach(selectCategory)
+        console.log(categories);
+    })
+
+const selectCategory = function (el) {
+    let eachOption = document.createElement('option')
+    const categoryNewImg = document.querySelector('#categoryNewImg')
+    categoryNewImg.appendChild(eachOption)
+    eachOption.innerHTML = el.name
 }

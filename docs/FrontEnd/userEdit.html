@@ -22,7 +22,7 @@
 <body>
     <!-- Les modals -->
     <!-- modalOne -->
-    <aside id="modal1" class="modal1" aria-hidden="true" role="dialog" aria-hidden="true" style="display: none;">
+    <aside id="modal1" class="modal1" aria-hidden="true" role="dialog" style="display: none;">
         <div class="modalWrapper">
             <div class="closeCross"><i class="fa-solid fa-xmark fa-2x"></i></div>
             <div class="titleModalOne">
@@ -41,14 +41,30 @@
         </div>
     </aside>
     <!-- modalTwo Ajout photo -->
-    <aside id="modalAddImg" class="modal2" aria-hidden="true" role="dialog" aria-hidden="true">
+    <aside id="modalAddImg" class="modal2" aria-hidden="true" role="dialog" style="display: none;">
         <div class="modalAddImgWrapper">
             <div class="closeCross2"><i class="fa-solid fa-xmark fa-2x"></i></div>
             <div class="titleModalTwo">
                 <h3>Ajout Photo</h3>
             </div>
             <div class="containModalTwo">
+                <div class="displayNewImg">
+                    <i class="fa-regular fa-image fa-6x"></i>
+                    <button class="addPhotoButton">
+                        + Ajouter photo
+                    </button>
+                    <p>jpg, png : 4mo max</p>
+                </div>
+                <div class="titleAndCategory">
+                    <h4>Titre</h4>
+                    <input type="text" value="" name="titleOfNewImg" id="titleInput">
+                    <label for="titleInput"></label>
+                    <h4>Catégorie</h4>
+                    <select name="categoryChoice" id="categoryNewImg">
 
+                    </select>
+
+                </div>
             </div>
             <hr>
             <button class="validateButton">
