@@ -59,6 +59,22 @@ const displayModal = function (item) {
     divOfEachContent.appendChild(moveIcone);
 
 }
+let token = localStorage.getItem('token');
+console.log(token);
+
+// suppression travaux : 
+
+fetch('http://localhost:5678/api/works/${id}', {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+    }
+
+})
+    .then(response => console.log(response));
+
 
 // affichage modal2 add photo : 
 let displayModalAddImg = function () {
@@ -102,3 +118,24 @@ const selectCategory = function (el) {
     categoryNewImg.appendChild(eachOption)
     eachOption.innerHTML = el.name
 }
+// input pour charger la nouvelle image
+
+
+let inputFile = document.querySelector('#addPicture')
+inputFile.addEventListener('change', displayNewImg)
+
+function displayNewImg() {
+    let positionNewImgWrapper = document.querySelector('.positionNewImgWrapper')
+    positionNewImgWrapper.style.display = null
+    const preview = document.querySelector('#positionNewImg');
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+        preview.src = reader.result;
+    });
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+
