@@ -51,6 +51,7 @@ const displayModal = function (item) {
     let moveIcone = document.createElement('i')
     moveIcone.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'moveIcone')
     trashIcone.classList.add('fa-regular', 'fa-trash-can', 'trashIcone')
+    trashIcone.setAttribute('data-image-id', item.id);
     imgOfEachContent.src = item.imageUrl
     divOfEachContent.innerHTML = 'éditer'
     containModal.appendChild(divOfEachContent);
@@ -59,21 +60,64 @@ const displayModal = function (item) {
     divOfEachContent.appendChild(moveIcone);
 
 }
+
+
+
+
+
+// selection des petites poubelles
 let token = localStorage.getItem('token');
-console.log(token);
+function deleteImage(imageId, trashIcone) {
+    let token = localStorage.getItem('token');
 
-// suppression travaux : 
+    console.log(imageId);
+    fetch('http://localhost:5678/api/works/' + imageId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
 
-fetch('http://localhost:5678/api/works/${id}', {
-    method: 'DELETE',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
+    })
+        .then(response => {
+            // Vérifiez la réponse et effectuez les actions nécessaires
+            if (response.ok) {
+                // Suppression réussie
+                console.log('Image supprimée avec succès');
+                // Supprimez également l'élément HTML correspondant à l'image
+                trashIcone.parentNode.remove(); // Supprime le conteneur div parent de l'icône de corbeille
+                trashIcone.remove()
+                createWorks();
+            } else {
+                // Gestion des erreurs en cas d'échec de suppression
+                console.log('Erreur lors de la suppression de l\'image');
+            }
+        })
+        .catch(error => {
+            console.log('Erreur lors de la suppression de l\'image:', error);
+        });
+
+}
+
+
+const containModal = document.querySelector('.containModal');
+
+containModal.addEventListener('click', function (event) {
+    if (event.target.matches('.trashIcone')) {
+        // L'icône de corbeille a été cliquée
+        const trashIcone = event.target;
+        const imageId = trashIcone.getAttribute('data-image-id');
+        console.log(imageId);
+        console.log(trashIcone);
+        deleteImage(imageId, trashIcone)
+
     }
+});
 
-})
-    .then(response => console.log(response));
+
+
+
 
 
 // affichage modal2 add photo : 

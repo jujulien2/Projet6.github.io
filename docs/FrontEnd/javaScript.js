@@ -63,43 +63,51 @@ theFilters.addEventListener('click', function (e) {
 
 // Les appels API avec les fonctions des filtres et divs avec forEach
 
-fetch('http://localhost:5678/api/works')
-    .then(response => (response.json()))
-    .then((data) => {
-        let cards = data;
-        data.forEach(createDiv);
+function createWorks() {
+
+    fetch('http://localhost:5678/api/works')
+        .then(response => (response.json()))
+        .then((data) => {
+            let cards = data;
+            gallery.innerHTML = ''
+            data.forEach(createDiv);
+        })
 
 
 
 
-        fetch('http://localhost:5678/api/categories')
-            .then(response => (response.json()))
-            .then((categories) => {
-
-                categories.forEach(filtersDiv);
-                const eachFilters = Array.from(theFilters.children)
-
-                for (let eachFilter of eachFilters) {
 
 
-                    eachFilter.addEventListener('click', function () {
-                        let idFilter = this.id;
-                        if (!idFilter) {
-                            gallery.innerHTML = ''
-                            cards.forEach(createDiv)
-                            return
-                        }
-                        const filtersCards = cards.filter(card => {
+
+    fetch('http://localhost:5678/api/categories')
+        .then(response => (response.json()))
+        .then((categories) => {
+
+            categories.forEach(filtersDiv);
+            const eachFilters = Array.from(theFilters.children)
+
+            for (let eachFilter of eachFilters) {
 
 
-                            return card.categoryId === +idFilter
-                        });
+                eachFilter.addEventListener('click', function () {
+                    let idFilter = this.id;
+                    if (!idFilter) {
                         gallery.innerHTML = ''
-                        filtersCards.forEach(createDiv)
+                        cards.forEach(createDiv)
+                        return
+                    }
+                    const filtersCards = cards.filter(card => {
+
+
+                        return card.categoryId === +idFilter
                     });
-                }
-            });
-    });
+                    gallery.innerHTML = ''
+                    filtersCards.forEach(createDiv)
+                });
+            }
+        });
+};
+createWorks();
 const filterALL = document.querySelector('.all');
 filterALL.classList.add("colorFilters");
 filterALL.addEventListener('click', () => {
