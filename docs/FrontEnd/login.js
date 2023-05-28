@@ -1,7 +1,9 @@
 // login 
 
 const formulaireLogin = document.querySelector('.loginForm');
-const modalTop = document.querySelector('.userModal');
+
+
+
 let CallApiLogin = function login(event) {
     event.preventDefault()
 
@@ -10,10 +12,10 @@ let CallApiLogin = function login(event) {
         password: event.target.querySelector("[name=password]").value
     }
     const chargeUtile = JSON.stringify(identifiant);
-    let LoginAPI = fetch('http://localhost:5678/api/users/login', {
+    fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {
-            "content-Type": "application/Json"
+            "Content-Type": "application/Json"
         },
         body: chargeUtile
     })
@@ -31,9 +33,11 @@ let CallApiLogin = function login(event) {
                 alert('Mot de passe ou identifiant incorrect')
             }
         })
-
-
 };
+
+
+
+
 formulaireLogin.addEventListener('submit', CallApiLogin);
 
 

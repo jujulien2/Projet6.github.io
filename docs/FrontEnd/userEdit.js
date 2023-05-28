@@ -68,7 +68,7 @@ const displayModal = function (item) {
 // selection des petites poubelles
 let token = localStorage.getItem('token');
 function deleteImage(imageId, trashIcone) {
-    let token = localStorage.getItem('token');
+
 
     console.log(imageId);
     fetch('http://localhost:5678/api/works/' + imageId, {
@@ -181,5 +181,69 @@ function displayNewImg() {
         reader.readAsDataURL(file);
     }
 }
+
+
+// bouton valider green class
+const title = document.getElementById("titleInput")
+const image = document.getElementById("addPicture")
+const category = document.getElementById("categoryNewImg")
+const buttonValidation = document.querySelector('.validateButton')
+function checkInputsFilled() {
+    if (title.value && image.files[0] && category.value) {
+        buttonValidation.classList.add('clickedFilters')
+    } else {
+        buttonValidation.classList.remove('clickedFilters')
+    }
+}
+
+title.addEventListener("input", checkInputsFilled)
+category.addEventListener('input', checkInputsFilled);
+image.addEventListener('change', checkInputsFilled);
+
+// retire le token du localstorage au logout :
+let logoutToken = document.getElementById('logout');
+logoutToken.addEventListener('click', function () {
+    localStorage.removeItem('token')
+})
+
+
+// Envoie nouveau travail : 
+
+
+function SendNewWork() {
+    const titleValue = document.getElementById("titleInput").value
+    const imageValue = document.getElementById("addPicture").value
+    const categoryValue = document.getElementById("categoryNewImg").value
+
+    console.log(titleValue);
+    console.log(imageValue);
+    console.log(categoryValue);
+
+
+
+    const formData = new FormData();
+    formData.append('title', titleValue);
+    formData.append('image', imageValue);
+    formData.append('category', categoryValue);
+
+
+
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        body: formData
+
+    }).then(response => response.json())
+        .then(data => {
+            console.log('r');
+        })
+        .catch(error => {
+            console.error('erreur');
+        })
+
+}
+buttonValidation.addEventListener('click', SendNewWork)
 
 
