@@ -37,30 +37,33 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
+function creationModalOne() {
 
-fetch('http://localhost:5678/api/works')
-    .then(response => (response.json()))
-    .then((data) => {
-        data.forEach(displayModal);
-    })
-const displayModal = function (item) {
-    const containModal = document.querySelector('.containModal')
-    let divOfEachContent = document.createElement('div')
-    let imgOfEachContent = document.createElement('img')
-    let trashIcone = document.createElement('i')
-    let moveIcone = document.createElement('i')
-    moveIcone.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'moveIcone')
-    trashIcone.classList.add('fa-regular', 'fa-trash-can', 'trashIcone')
-    trashIcone.setAttribute('data-image-id', item.id);
-    imgOfEachContent.src = item.imageUrl
-    divOfEachContent.innerHTML = 'éditer'
-    containModal.appendChild(divOfEachContent);
-    divOfEachContent.appendChild(imgOfEachContent);
-    divOfEachContent.appendChild(trashIcone);
-    divOfEachContent.appendChild(moveIcone);
+    fetch('http://localhost:5678/api/works')
+        .then(response => (response.json()))
+        .then((data) => {
+            containModal.innerHTML = ''
+            data.forEach(displayModal);
+        })
+    const displayModal = function (item) {
+        const containModal = document.querySelector('.containModal')
+        let divOfEachContent = document.createElement('div')
+        let imgOfEachContent = document.createElement('img')
+        let trashIcone = document.createElement('i')
+        let moveIcone = document.createElement('i')
+        moveIcone.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'moveIcone')
+        trashIcone.classList.add('fa-regular', 'fa-trash-can', 'trashIcone')
+        trashIcone.setAttribute('data-image-id', item.id);
+        imgOfEachContent.src = item.imageUrl
+        divOfEachContent.innerHTML = 'éditer'
+        containModal.appendChild(divOfEachContent);
+        divOfEachContent.appendChild(imgOfEachContent);
+        divOfEachContent.appendChild(trashIcone);
+        divOfEachContent.appendChild(moveIcone);
 
+    }
 }
-
+creationModalOne()
 
 
 
@@ -153,7 +156,7 @@ fetch('http://localhost:5678/api/categories')
     .then(response => (response.json()))
     .then((categories) => {
         categories.forEach(selectCategory)
-        console.log(categories);
+
     })
 
 const selectCategory = function (el) {
@@ -161,6 +164,10 @@ const selectCategory = function (el) {
     const categoryNewImg = document.querySelector('#categoryNewImg')
     categoryNewImg.appendChild(eachOption)
     eachOption.innerHTML = el.name
+    eachOption.value = el.id
+
+
+
 }
 // input pour charger la nouvelle image
 
@@ -183,22 +190,6 @@ function displayNewImg() {
 }
 
 
-// bouton valider green class
-const title = document.getElementById("titleInput")
-const image = document.getElementById("addPicture")
-const category = document.getElementById("categoryNewImg")
-const buttonValidation = document.querySelector('.validateButton')
-function checkInputsFilled() {
-    if (title.value && image.files[0] && category.value) {
-        buttonValidation.classList.add('clickedFilters')
-    } else {
-        buttonValidation.classList.remove('clickedFilters')
-    }
-}
-
-title.addEventListener("input", checkInputsFilled)
-category.addEventListener('input', checkInputsFilled);
-image.addEventListener('change', checkInputsFilled);
 
 // retire le token du localstorage au logout :
 let logoutToken = document.getElementById('logout');
@@ -206,13 +197,18 @@ logoutToken.addEventListener('click', function () {
     localStorage.removeItem('token')
 })
 
+window.addEventListener('beforeunload', function () {
+    // localStorage.removeItem('token')
+
+})
 
 // Envoie nouveau travail : 
 
 
-function SendNewWork() {
+function SendNewWork(event) {
+    event.preventDefault()
     const titleValue = document.getElementById("titleInput").value
-    const imageValue = document.getElementById("addPicture").value
+    const imageValue = document.getElementById("addPicture").files[0]
     const categoryValue = document.getElementById("categoryNewImg").value
 
     console.log(titleValue);
@@ -237,13 +233,34 @@ function SendNewWork() {
 
     }).then(response => response.json())
         .then(data => {
-            console.log('r');
+            createWorks()
+            creationModalOne()
+
         })
         .catch(error => {
             console.error('erreur');
         })
 
 }
-buttonValidation.addEventListener('click', SendNewWork)
+const formular = document.querySelector('.formModalTwo')
 
+
+// bouton valider green class et appel de la fonction d'envoi au submit si les imputs sont rempli
+const title = document.getElementById("titleInput")
+const image = document.getElementById("addPicture")
+const category = document.getElementById("categoryNewImg")
+const buttonValidation = document.querySelector('.validateButton')
+function checkInputsFilled() {
+    if (title.value && image.files[0] && category.value) {
+        buttonValidation.classList.add('clickedFilters');
+        formular.addEventListener('submit', SendNewWork);
+    } else {
+        buttonValidation.classList.remove('clickedFilters')
+        formular.removeEventListener('submit', SendNewWork);
+
+    }
+}
+title.addEventListener("input", checkInputsFilled)
+category.addEventListener('input', checkInputsFilled);
+image.addEventListener('change', checkInputsFilled);
 

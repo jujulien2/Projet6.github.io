@@ -223,7 +223,6 @@ align-items: center;
     display: grid;
     grid-template-columns: 110px 110px 110px 110px 110px;
     grid-column-gap: 12px;
-    grid-row-gap: 20px;
 height: 100%;
 }
 .containModal div{
@@ -357,7 +356,7 @@ font-size: 20px;
 .displayNewImg i {
 	color: #8f979b;
 }
-.containModalTwo{
+.formModalTwo{
 	height: 100%;
     width: calc(100% - 130px);
     display: flex;
@@ -537,13 +536,15 @@ li:hover {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: 485px;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
 
 .gallery img {
 	width: 100%;
-
+height: 100%;
+object-fit: cover;
 }
 
 #contact {
