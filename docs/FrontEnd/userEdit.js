@@ -189,6 +189,15 @@ function displayNewImg() {
     }
 }
 
+// petite flèche de retour : 
+let arrowLeft = document.querySelector('.arrowLeft')
+arrowLeft.addEventListener('click', function () {
+    const myModalOne = document.querySelector('#modal1')
+    const myModalTwo = document.querySelector('.modal2')
+    myModalTwo.style.display = 'none'
+    myModalOne.style.display = null
+
+})
 
 
 // retire le token du localstorage au logout :
@@ -197,16 +206,11 @@ logoutToken.addEventListener('click', function () {
     localStorage.removeItem('token')
 })
 
-window.addEventListener('beforeunload', function () {
-    // localStorage.removeItem('token')
-
-})
 
 // Envoie nouveau travail : 
 
 
-function SendNewWork(event) {
-    event.preventDefault()
+function SendNewWork() {
     const titleValue = document.getElementById("titleInput").value
     const imageValue = document.getElementById("addPicture").files[0]
     const categoryValue = document.getElementById("categoryNewImg").value
