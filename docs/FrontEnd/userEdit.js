@@ -84,16 +84,13 @@ function deleteImage(imageId, trashIcone) {
 
     })
         .then(response => {
-            // Vérifiez la réponse et effectuez les actions nécessaires
             if (response.ok) {
-                // Suppression réussie
                 console.log('Image supprimée avec succès');
-                // Supprimez également l'élément HTML correspondant à l'image
+                // Supprime l'élément HTML correspondant à l'image
                 trashIcone.parentNode.remove(); // Supprime le conteneur div parent de l'icône de corbeille
                 trashIcone.remove()
                 createWorks();
             } else {
-                // Gestion des erreurs en cas d'échec de suppression
                 console.log('Erreur lors de la suppression de l\'image');
             }
         })
@@ -103,9 +100,7 @@ function deleteImage(imageId, trashIcone) {
 
 }
 
-
 const containModal = document.querySelector('.containModal');
-
 containModal.addEventListener('click', function (event) {
     if (event.target.matches('.trashIcone')) {
         // L'icône de corbeille a été cliquée
@@ -114,7 +109,6 @@ containModal.addEventListener('click', function (event) {
         console.log(imageId);
         console.log(trashIcone);
         deleteImage(imageId, trashIcone)
-
     }
 });
 
@@ -136,8 +130,10 @@ let displayModalAddImg = function () {
 
 }
 
+
 const addPictureButton = document.querySelector('.addPictureButton');
 addPictureButton.addEventListener('click', displayModalAddImg)
+console.log(addPictureButton);
 
 // gerer la fermrute et le click de la modal2 : 
 let closeModalTwo = function () {
@@ -164,10 +160,8 @@ const selectCategory = function (el) {
     const categoryNewImg = document.querySelector('#categoryNewImg')
     categoryNewImg.appendChild(eachOption)
     eachOption.innerHTML = el.name
+    // l'id des categories sinon l'appel API reçoit une string : objet, catgorie..etc Alors qu'il veut le nombre de l'id ! Détail important
     eachOption.value = el.id
-
-
-
 }
 // input pour charger la nouvelle image
 
@@ -206,11 +200,18 @@ logoutToken.addEventListener('click', function () {
     localStorage.removeItem('token')
 })
 
+// ( fonction qui réinitialise les champs après envoi) :
 
-// Envoie nouveau travail : 
-
-
-function SendNewWork() {
+function resetForm() {
+    const title = document.getElementById("titleInput")
+    const imageCurrently = document.querySelector(".positionNewImgWrapper")
+    title.value = '';
+    imageCurrently.style.display = 'none';
+    buttonValidation.classList.remove('clickedFilters');
+}
+// Envoie nouveau travail :
+function SendNewWork(event) {
+    event.preventDefault()
     const titleValue = document.getElementById("titleInput").value
     const imageValue = document.getElementById("addPicture").files[0]
     const categoryValue = document.getElementById("categoryNewImg").value
@@ -239,7 +240,7 @@ function SendNewWork() {
         .then(data => {
             createWorks()
             creationModalOne()
-
+            resetForm()
         })
         .catch(error => {
             console.error('erreur');
@@ -254,8 +255,9 @@ const title = document.getElementById("titleInput")
 const image = document.getElementById("addPicture")
 const category = document.getElementById("categoryNewImg")
 const buttonValidation = document.querySelector('.validateButton')
+
 function checkInputsFilled() {
-    if (title.value && image.files[0] && category.value) {
+    if (title.value && image.files[0]) {
         buttonValidation.classList.add('clickedFilters');
         formular.addEventListener('submit', SendNewWork);
     } else {
@@ -268,3 +270,9 @@ title.addEventListener("input", checkInputsFilled)
 category.addEventListener('input', checkInputsFilled);
 image.addEventListener('change', checkInputsFilled);
 
+buttonValidation.addEventListener('click', function (event) {
+    if (!title.value || !image.files[0]) {
+        event.preventDefault()
+        alert('veuillez remplir tous les champs')
+    }
+})
